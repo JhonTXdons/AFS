@@ -1,2 +1,2 @@
 
-Copyright (C) 2018 Andrea - Laptop - PC
+Copyright (C) 2018 Andrea
