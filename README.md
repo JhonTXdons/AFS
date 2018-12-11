@@ -1,3 +1,1 @@
-AFS
-
-- Nuova Repo
+Albo Fornitori - Svicom
