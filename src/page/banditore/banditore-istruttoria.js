@@ -37,7 +37,7 @@ export class BanditoreIstruttoria extends React.Component {
         IVAForn: this.props.location.state.dettPartecip.IVAForn,
         FGiurid: this.props.location.state.dettPartecip.FGiurid,
         PEC: this.props.location.state.dettPartecip.PEC,
-        SitoWeb: this.props.location.state.dettPartecip.SitoWeb,
+        SitoWeb: this.props.location.state.dettPartecip.SitoWebi,
       }],
 
       dataValutazione: [{
