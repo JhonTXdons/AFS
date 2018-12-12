@@ -19,7 +19,7 @@ export class Register extends React.Component {
       checkboxChecked: false,
       firstName: '', //text
       lastName: '',
-      
+
         //Dati per update profilo fornitore
         Nome: '', //text
         Cognome: '',
@@ -33,10 +33,13 @@ export class Register extends React.Component {
         IvaForn : '',
         FGiurid : '',
         ATECO: '', //alfanumerico
+        AnnoCCIAA: '', //da implementare
         ProvinciaCCIAA: '',
         NumeroREA: '',
         SitoWeb: '',
         PEC: '',
+        AreaServizio: '',//da implementare
+        SubAreaServizio: '',//da implementare
         SLStato:'',
         SLRegione:'',
         SLProvincia:'',
@@ -50,7 +53,19 @@ export class Register extends React.Component {
         SAmmFAX:'',
         SAmmProvincia:'',
         SAmmIndirizzo:'',
-      
+        FattAnnuo1: '',//da implementare
+        FattAnnuo2: '',//da implementare
+        FattAnnuo3: '',//da implementare
+        OrgMedio1: '',//da implementare
+        OrgMedio2: '',//da implementare
+        OrgMedio3: '',//da implementare
+        TipoCCNL: '',//da implementare
+        PosINPS: '',//da implementare
+        PosINAIL: '',//da implementare
+        CapSociale: '', //da implementare
+        NDipendenti: '',//da implementare
+        NStabilimenti: '',//da implementare
+
     };
   }
 
@@ -106,13 +121,13 @@ export class Register extends React.Component {
          if(value.length > 15){
           return 'error';
         }
-      case 'password':
+      case 'Passwd':
         if(value.length > 15){
          return 'error';
        }
         break;
       case 'password2':
-        if(!value.match('passowrd')){
+        if(!value.match('password')){
           return 'error';
         }
         break;
@@ -278,7 +293,7 @@ export class Register extends React.Component {
     return (
       <div className="lockRegister">
         <Page title='Registrati per poter utilizzare la piattaforma'>
-          <div style={{float:'left'}}>
+          <div style={{float:'right'}}>
             <Link  to={'/auth'}><Button icon={<i className="fa fa-chevron-circle-left"></i>}  type='default' size='md' title='Indietro'/></Link>
           </div>
           <form>
@@ -304,7 +319,7 @@ export class Register extends React.Component {
                     <Input
                       type='email'
                       label='email'
-                      placeholder='...'
+                      placeholder='lamiaemail@mail.it'
                       onChange={e => this.onTextChange('AccessoMail', e)}
                       onValidate={e => this.FieldValidation('email', e)}
                       value={this.state.AccessoMail} />
@@ -372,11 +387,79 @@ export class Register extends React.Component {
                     <Input
                       type='text'
                       label='Numero di Telefono'
-                      placeholder='0234124554'
+                      placeholder=' es. 1234567890'
                       onChange={e => this.onTextChange('Telefono', e)}
                       onValidate={e => this.FieldValidation('phoneNumber', e)}
                       value={this.state.Telefono} />
-
+                    </Panel>
+                    <Panel title = "Dati Finanziari">
+                    <div>
+                      <Input
+                        type='text'
+                        label='Fatturato 1° Anno'
+                        placeholder='es. 10.000'
+                        onChange={e => this.onTextChange('FattAnnuo1', e)}
+                        onValidate={e => this.FieldValidation('FattAnnuo1', e)}
+                        value={this.state.FattAnnuo1} />
+                        <Input
+                          type='text'
+                          label='Fatturato 2° Anno'
+                          placeholder='es. 10.000'
+                          onChange={e => this.onTextChange('FattAnnuo2', e)}
+                          onValidate={e => this.FieldValidation('FattAnnuo2', e)}
+                          value={this.state.FattAnnuo2} />
+                          <Input
+                            type='text'
+                            label='Fatturato 3° Anno'
+                            placeholder='es. 10.000'
+                            onChange={e => this.onTextChange('FattAnnuo3', e)}
+                            onValidate={e => this.FieldValidation('FattAnnuo3', e)}
+                            value={this.state.FattAnnuo3} />
+                            <span>&nbsp;&nbsp;</span>
+                      <Input
+                        type='text'
+                        label='Organico Medio 1° Anno'
+                        placeholder='es. 10'
+                        onChange={e => this.onTextChange('OrgMedio1', e)}
+                        onValidate={e => this.FieldValidation('OrgMedio1', e)}
+                        value={this.state.OrgMedio1} />
+                      <Input
+                        type='text'
+                        label='Organico Medio 2° Anno'
+                        placeholder='es. 10'
+                        onChange={e => this.onTextChange('OrgMedio2', e)}
+                        onValidate={e => this.FieldValidation('OrgMedio2', e)}
+                        value={this.state.OrgMedio2} />
+                      <Input
+                        type='text'
+                        label='Organico Medio 3° Anno'
+                        placeholder='es. 10'
+                        onChange={e => this.onTextChange('OrgMedio3', e)}
+                        onValidate={e => this.FieldValidation('OrgMedio3', e)}
+                        value={this.state.OrgMedio3} />
+                        <span>&nbsp;&nbsp;</span>
+                      <Input
+                        type='text'
+                        label='Capitale Sociale'
+                        placeholder='es. ...'
+                        onChange={e => this.onTextChange('CapSociale', e)}
+                        onValidate={e => this.FieldValidation('CapSociale', e)}
+                        value={this.state.CapSociale} />
+                      <Input
+                        type='text'
+                        label='Numero di Dipendenti (alla data attuale)'
+                        placeholder='es. ...'
+                        onChange={e => this.onTextChange('NDipendenti', e)}
+                        onValidate={e => this.FieldValidation('NDipendenti', e)}
+                        value={this.state.NDipendenti} />
+                      <Input
+                        type='text'
+                        label='Numero di Stabilimenti (alla data attuale)'
+                        placeholder='es. ...'
+                        onChange={e => this.onTextChange('NStabilimenti', e)}
+                        onValidate={e => this.FieldValidation('NStabilimenti', e)}
+                        value={this.state.NStabilimenti} />
+                    </div>
                     </Panel>
                   </div>
               </Col>
@@ -427,7 +510,7 @@ export class Register extends React.Component {
                           <Input
                             type='text'
                             label="Sotto Categoria"
-                            placeholder='...'
+                            placeholder='inserire per ampliare Categoria'
                             onChange={e => this.onTextChange('SottoCategoria', e)}
                             onValidate={e => this.FieldValidation('subCategoria', e)}
                             value={this.state.SottoCategoria} />
@@ -443,7 +526,7 @@ export class Register extends React.Component {
                       <Input
                         type='text'
                         label='Telefono Aziendale'
-                        placeholder='000000000000'
+                        placeholder='0123456789'
                         onChange={e => this.onTextChange('Telefono', e)}
                         onValidate={e => this.FieldValidation('telAz', e)}
                         value={this.state.Telefono} />
@@ -478,6 +561,14 @@ export class Register extends React.Component {
                     </Row>
                     <Input
                       type='text'
+                      label='Anno iscrizione CCIAA'
+                      placeholder='es. 2000'
+                      onChange={e => this.onTextChange('AnnoCCIAA', e)}
+                      onValidate={e => this.FieldValidation('AnnoCCIAA', e)}
+                      value={this.state.AnnoCCIAA} />
+
+                    <Input
+                      type='text'
                       label='Provincia CCIAA'
                       placeholder='es. AN'
                       onChange={e => this.onTextChange('ProvinciaCCIAA', e)}
@@ -507,6 +598,31 @@ export class Register extends React.Component {
                       onValidate={e => this.FieldValidation('pec', e)}
                       value={this.state.PEC} />
                   </Panel>
+                  <Panel title = "Dati Finanziari - Dimensione Impresa">
+                  <div>
+                    <Input
+                      type='text'
+                      label='Posizione INPS'
+                      placeholder='es. ...'
+                      onChange={e => this.onTextChange('PosINPS', e)}
+                      onValidate={e => this.FieldValidation('PosINPS', e)}
+                      value={this.state.PosINPS} />
+                    <Input
+                      type='text'
+                      label='Posizione INAIL'
+                      placeholder='es. ...'
+                      onChange={e => this.onTextChange('PosINAIL', e)}
+                      onValidate={e => this.FieldValidation('PosINAIL', e)}
+                      value={this.state.PosINAIL} />
+                    <Input
+                      type='text'
+                      label='Tipo di contratto CCNL'
+                      placeholder='es. ...'
+                      onChange={e => this.onTextChange('TipoCCNL', e)}
+                      onValidate={e => this.FieldValidation('TipoCCNL', e)}
+                      value={this.state.TipoCCNL} />
+                  </div>
+                  </Panel>
                 </div>
               </Col>
             </Row>
@@ -518,7 +634,7 @@ export class Register extends React.Component {
                   <Input
                     type='text'
                     label="Stato"
-                    placeholder='stato'
+                    placeholder='es. Italia'
                     onChange={e => this.onTextChange('SLStato', e)}
                     value={this.state.SLStato} />
                   <div>
