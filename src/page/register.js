@@ -19,7 +19,7 @@ export class Register extends React.Component {
       checkboxChecked: false,
       firstName: '', //text
       lastName: '',
-
+      
         //Dati per update profilo fornitore
         Nome: '', //text
         Cognome: '',
