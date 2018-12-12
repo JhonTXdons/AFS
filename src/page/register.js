@@ -472,7 +472,7 @@ export class Register extends React.Component {
                       placeholder='nome azienda'
                       onChange={e => this.onTextChange('nomeAzienda', e)}
                       onValidate={e => this.FieldValidation('nomeAzienda', e)}
-                      value={this.state.NomeForn} />
+                      value={this.state.nomeAzienda} />
                     <div>
                       <h6>Categoria Generica del Fornitore</h6>
                         <Select
@@ -514,6 +514,20 @@ export class Register extends React.Component {
                             onChange={e => this.onTextChange('SottoCategoria', e)}
                             onValidate={e => this.FieldValidation('subCategoria', e)}
                             value={this.state.SottoCategoria} />
+                            <Input
+                              type='text'
+                              label='Area/Copertura dei Servizi'
+                              placeholder='es. Regione'
+                              onChange={e => this.onTextChange('AreaServizio', e)}
+                              onValidate={e => this.FieldValidation('AreaServizio', e)}
+                              value={this.state.AreaServizio} />
+                            <Input
+                              type='text'
+                              label='Sotto Area/Copertura dei Servizi'
+                              placeholder='es. Provincia'
+                              onChange={e => this.onTextChange('SubAreaServizio', e)}
+                              onValidate={e => this.FieldValidation('SubAreaServizio', e)}
+                              value={this.state.SubAreaServizio} />
                     </div>
                     <Input
                       type='text'
@@ -644,12 +658,26 @@ export class Register extends React.Component {
                       placeholder='Regione'
                       isSearchable={true}
                       options={[
-                        { value: 1, label: 'Marche' },
-                        { value: 2, label: 'Umbria' },
-                        { value: 3, label: 'Lazio' },
-                        { value: 4, label: 'Veneto' },
-                        { value: 5, label: 'Puglia' },
-                        { value: 6, label: 'Emilia Romagna' },
+                        { value: 'Lombardia', label: 'Lombardia' },
+                        { value: 'Lazio', label: 'Lazio' },
+                        { value: 'Campania', label: 'Campania' },
+                        { value: 'Sicilia', label: 'Sicilia' },
+                        { value: 'Veneto', label: 'Veneto' },
+                        { value: 'Emilia-Romagna', label: 'Emilia-Romagna' },
+                        { value: 'Piemonte', label: 'Piemonte' },
+                        { value: 'Puglia', label: 'Puglia' },
+                        { value: 'Toscana', label: 'Toscana' },
+                        { value: 'Calabria', label: 'Calabria' },
+                        { value: 'Sardegna', label: 'Sardegna' },
+                        { value: 'Liguria', label: 'Liguria' },
+                        { value: 'Marche', label: 'Marche' },
+                        { value: 'Abruzzo', label: 'Abruzzo' },
+                        { value: 'Friuli-Venezia Giulia', label: 'Friuli-Venezia Giulia' },
+                        { value: 'Trentino-Alto Adige', label: 'Trentino-Alto Adige' },
+                        { value: 'Umbria', label: 'Umbria' },
+                        { value: 'Basilicata', label: 'Basilicata' },
+                        { value: 'Molise', label: 'Molise' },
+                        { value: "Valle d'Aosta", label: "Valle d'Aosta" },
                       ]}
                       ref={(input) => this.selectVal = input}
                       onChange={(e) => this.handleChangeSelect('SLRegione',e)} />
@@ -725,12 +753,26 @@ export class Register extends React.Component {
                         placeholder='Regione'
                         isSearchable={true}
                         options={[
-                          { value: 1, label: 'Marche' },
-                          { value: 2, label: 'Umbria' },
-                          { value: 3, label: 'Lazio' },
-                          { value: 4, label: 'Veneto' },
-                          { value: 5, label: 'Puglia' },
-                          { value: 6, label: 'Emilia Romagna' },
+                          { value: 'Lombardia', label: 'Lombardia' },
+                          { value: 'Lazio', label: 'Lazio' },
+                          { value: 'Campania', label: 'Campania' },
+                          { value: 'Sicilia', label: 'Sicilia' },
+                          { value: 'Veneto', label: 'Veneto' },
+                          { value: 'Emilia-Romagna', label: 'Emilia-Romagna' },
+                          { value: 'Piemonte', label: 'Piemonte' },
+                          { value: 'Puglia', label: 'Puglia' },
+                          { value: 'Toscana', label: 'Toscana' },
+                          { value: 'Calabria', label: 'Calabria' },
+                          { value: 'Sardegna', label: 'Sardegna' },
+                          { value: 'Liguria', label: 'Liguria' },
+                          { value: 'Marche', label: 'Marche' },
+                          { value: 'Abruzzo', label: 'Abruzzo' },
+                          { value: 'Friuli-Venezia Giulia', label: 'Friuli-Venezia Giulia' },
+                          { value: 'Trentino-Alto Adige', label: 'Trentino-Alto Adige' },
+                          { value: 'Umbria', label: 'Umbria' },
+                          { value: 'Basilicata', label: 'Basilicata' },
+                          { value: 'Molise', label: 'Molise' },
+                          { value: "Valle d'Aosta", label: "Valle d'Aosta" },
                         ]}
                         ref={(input) => this.selectVal = input}
                         onChange={(e) => this.handleChangeSelect('SAmmRegione',e)}  />
