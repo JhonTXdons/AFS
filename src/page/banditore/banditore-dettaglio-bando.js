@@ -25,13 +25,55 @@ import 'filepond/dist/filepond.min.css';
 import _ from 'lodash';
 import star from 'public/star.png';
 
-//Multyselect
+const selectRowProp = {
+  mode: 'checkbox',
+  bgColor: 'green', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
+  hideSelectColumn: true,  // enable hide selection column.
+  clickToSelect: true  // you should enable clickToSelect, otherwise, you can't select column.
+};
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-];
+function dateFormatter(cell, row) {
+  if (typeof cell !== 'object') {
+   cell = new Date(cell);
+ }
+  return `${('0' + cell.getDate()).slice(-2)}/${('0' + (cell.getMonth() + 1)).slice(-2)}/${cell.getFullYear()}`;
+}
+
+function priceFormatter(cell, row) {
+  return `${cell} &euro;`;
+}
+
+function ratingFormatter(cell, row) {
+  if(cell == 0){
+    return 'LIBERO';
+  }
+  else{
+    if(cell<=19 && cell>=1){
+      return (<img src={star}/>);
+    }
+    else{
+      if(cell<=39 && cell>=20){
+        return <div><img src={star}/><img src={star}/></div>;
+      }
+      else{
+        if(cell<=59 && cell>=40){
+          return <div><img src={star}/><img src={star}/><img src={star}/></div>;
+        }
+        else{
+          if(cell<=79 && cell>=60){
+            return <div><img src={star}/><img src={star}/><img src={star}/><img src={star}/></div>;
+          }
+          else{
+            if(cell<=100 && cell>=80){
+              return <div><img src={star}/><img src={star}/><img src={star}/><img src={star}/><img src={star}/></div>;
+            }
+      }
+    }
+  }
+}
+}
+}
+
 
 export class BanditoreDettaglioBando extends React.Component {
   constructor(props) {
@@ -73,6 +115,7 @@ export class BanditoreDettaglioBando extends React.Component {
 
               //mail per inviare gli inviti ai bandi
               MailsForInvito: [],
+              invites:[],
           }
           this.handleChangeApertura = this.handleChangeApertura.bind(this);
           this.handleChangeChiusura = this.handleChangeChiusura.bind(this);
@@ -205,7 +248,7 @@ export class BanditoreDettaglioBando extends React.Component {
       })
     }
 
-    
+
     this.getPartecip(MailUser);
     if(this.state.stato == 'Nascosto'){
       this.setState({
@@ -365,7 +408,7 @@ selectVincitore(){
     //console.log("risultato" + result);
     if (result.data.length != 0) {
       eventBus.addNotification('success','vincitore selezionato!');
-      
+
     }else {
       eventBus.addNotification('error','Non sono riuscito a selezionare il vincitore!');
     }
@@ -422,7 +465,7 @@ sendMail(MailUser) {
     if (result.data.length != 0) {                                                 //diverso da null se ricevo una risposta altrimenti do un alert di reinserimento dati
        //omettiamo il controllo del valore della variabile userToken andando a resettarla per assicurarci che sia il primo accesso
         console.log('Mail di notifica inviate con successo: '+result.data);          //controllo che abbia settato il token
-       
+
         //inserisco i valori del fornitore in un array che utilizzero poi nei campi di visualizzazione del medesimo
         self.setState({
           data: result.data
@@ -465,6 +508,10 @@ sendMailInvito() {
     if(this.state.data.length != 0){
        dataB = this.state.partecipForn; //provvedo ad evitare che la pagina vada in errore perche' al primo render lo state non e' settato
     }
+    let invites = [];
+    if(this.state.data.length != 0){
+       invites = this.state.invites; //provvedo ad evitare che la pagina vada in errore perche' al primo render lo state non e' settato
+    }
 
     return (
     <Page actionBar={this.renderBreadcrumbs()} title="Dettaglio Offerta:">
@@ -502,16 +549,25 @@ sendMailInvito() {
                   <Modal.Title style={{color:'#ffffff'}}>Gara con Invito</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <FormGroup>
+                {/*<FormGroup>
                   <ControlLabel>Invita</ControlLabel>
                   <FormControl componentClass="select" multiple>
                     {this.state.MailsForInvito.map((p, i) => {
                         <FormControl componentClass="select">
-                          <option>Nome: {p[i].NomeForn} - Mail: {p[i].Mail}</option> 
+                          <option>Nome: {p[i].NomeForn} - Mail: {p[i].Mail}</option>
                         </FormControl>
                     })}
                   </FormControl>
-                </FormGroup>
+                </FormGroup>*/}
+                <div>
+                  <BootstrapTable className="bordered" data={ invites } selectRow={ selectRowProp }>
+                    <TableHeaderColumn className="" dataField='ID' hide={true} editable={false} width='0' isKey={true} dataSort={ true } dataAlign='center'>ID</TableHeaderColumn>
+                    <TableHeaderColumn className="" dataField='NomeForn' width='auto' filter={ { type: 'TextFilter', delay: 1000, placeholder: 'Cerca...' }} dataAlign='center' dataSort={ true }>NOME FORNITORE</TableHeaderColumn>
+                    <TableHeaderColumn className="" dataField='Mail' filter={ { type: 'TextFilter', delay: 1000, placeholder: 'Cerca...'  }} dataAlign='center' dataSort={ true }>Zona Principale</TableHeaderColumn>
+                    <TableHeaderColumn className="" dataField='DataCreazione' filter={ { type: 'TextFilter', delay: 1000, placeholder: 'Cerca...'  }} dataAlign='center' dataFormat={ dateFormatter } dataSort={ true }>Zona Secondaria</TableHeaderColumn>
+                    <TableHeaderColumn className="" dataField='Apertura' filter={ { type: 'TextFilter', delay: 1000, placeholder: 'Cerca...'  }} dataAlign='center' dataFormat={ dateFormatter }  dataSort={ true }>Valutazione</TableHeaderColumn>
+                  </BootstrapTable>
+                </div>
               </Modal.Body>
               <Modal.Footer>
                   <Button type='primary' onClick={this.submit} title='Conferma & Invia' onClick={() => this.sendMailInvito()}/>

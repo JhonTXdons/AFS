@@ -19,6 +19,13 @@ import DatePicker from 'react-bootstrap-date-picker';
 const spanishDayLabels = [ 'Lun', 'Mar', 'Mer', 'Gio', 'Ved', 'Sab','Dom'];
 const spanishMonthLabels = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
 
+const selectRowProp = {
+  mode: 'checkbox',
+  bgColor: 'green', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
+  hideSelectColumn: true,  // enable hide selection column.
+  clickToSelect: true  // you should enable clickToSelect, otherwise, you can't select column.
+};
+
 function dateFormatter(cell, row) {
   if (typeof cell !== 'object') {
    cell = new Date(cell);
@@ -408,7 +415,7 @@ export class BanditorePannel extends Modal {
                                     value={this.state.minRating}
                                     onChange={e => this.logChangeDataMinRating(e)}/>
                                 </Row>
-
+                                <span>-------------------------------------------------------------------------------------------------------------------------</span>
                                 <Row>
                                   {/*Questa check fa in modo che il bando sia sotto invito del banditore solo per alcune aziende*/}
                                   <Input
@@ -421,7 +428,10 @@ export class BanditorePannel extends Modal {
                                   {/*Questo input si attiva se la checkbox sopra viene selezionata*/}
 
                                 </Row>
+                      
                               </div>
+                              <span>-----------------------------------------------------------------------------------------------------------------------</span>
+                              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                               <div>
                                 <h5>Descrizione della Gara - Max 300 Caratteri</h5>
                                 <Textarea
